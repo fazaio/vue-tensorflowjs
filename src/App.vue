@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- <imeg src="http://proxy.cctv.malangkota.go.id/image?host=10.0.3.35"/> -->
+    <tf />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import imeg from './components/reloadImg.vue'
+import tf from './components/tensorflowjs'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // imeg,
+    tf
   }
 }
 </script>
