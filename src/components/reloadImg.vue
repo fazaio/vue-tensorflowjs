@@ -1,62 +1,50 @@
 <template>
-  <img width="80%" :src="imageSrc">
+  <div>
+    <img width="80%" :src="imageSrc" />
+    <div>
+      <button v-on:click="play()">Start Stream</button>
+      <button v-on:click="pause()">Pause Stream</button>
+    </div>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+
+
 export default {
-  props: ['src'],
+  props: ["src"],
   data() {
     return {
-      show: false,
-      interval: null,
-      imageSrc: null
-    }
+      imageSrc: this.src,
+      interval: "",
+    };
   },
   created() {
-    this.imageSrc = this.$props.src;
-    console.log(this.imageSrc);
-    this.renderImage();
-  },
-  mounted() {
-    this.startInterval();
-  },
-  beforeDestroy() {
-    // console.log('beforeDestroy');
-    clearInterval(this.interval);
-  },
-  destroyed() {
-    // console.log('destroyed');
-    clearInterval(this.interval);
+    // this.imageSrc = this.src;
   },
   methods: {
-    startInterval() {
+    play() {
       this.interval = setInterval(() => {
-        this.renderImage();
-      }, 1000)
+        this.reqImg();
+      }, 2000);
     },
-    toDataURL(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        var reader = new FileReader();
-        reader.onloadend = function() {
-          callback(reader.result);
-        }
-        reader.readAsDataURL(xhr.response);
-      };
-      xhr.open('GET', url);
-      xhr.responseType = 'blob';
-      xhr.send();
+    pause() {
+      clearInterval(this.interval);
     },
-    renderImage() {
-      this.toDataURL(this.$props.src, (res) => {
-        // console.log(res);
-        this.imageSrc = res;
-      })
-    },
+    async reqImg() {
+      axios
+        .get(this.src, {
+          responseType: "arraybuffer",
+        })
+        .then((response) => {
+          this.imageSrc =
+            "data:image/jpeg;base64," +
+            new Buffer(response.data, "binary").toString("base64");
+        });
+    }
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

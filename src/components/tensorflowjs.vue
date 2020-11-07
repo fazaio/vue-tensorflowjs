@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h1>hello world</h1>
     <img
       id="img"
-      src="https://images.pexels.com/photos/4613887/pexels-photo-4613887.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+      src="@/assets/tes.jpeg"
     />
   </div>
 </template>

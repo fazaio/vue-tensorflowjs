@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <!-- <imeg src="http://proxy.cctv.malangkota.go.id/image?host=10.0.3.35"/> -->
-    <tf />
+    <imeg src="http://proxy.cctv.malangkota.go.id/image?host=10.0.3.35"/>
   </div>
 </template>
 
 <script>
-// import imeg from './components/reloadImg.vue'
-import tf from './components/tensorflowjs'
+import imeg from './components/reloadImg.vue'
+// import tf from './components/tensorflowjs'
 
 export default {
   name: 'App',
   components: {
-    // imeg,
-    tf
+    imeg,
+    // tf
   }
 }
 </script>
