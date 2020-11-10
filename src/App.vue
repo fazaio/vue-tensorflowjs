@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <imeg src="http://proxy.cctv.malangkota.go.id/image?host=10.0.3.35"/>
+    <imeg src="http://proxy.cctv.malangkota.go.id/image?host=10.0.3.54"/>
   </div>
 </template>
 
