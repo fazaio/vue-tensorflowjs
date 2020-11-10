@@ -50,6 +50,7 @@ export default {
         axios
           .get(this.src, {
             responseType: "arraybuffer",
+            "Access-Control-Allow-Origin" : "*"
           })
           .then((response) => {
             // console.log("response from axios");
@@ -79,7 +80,7 @@ export default {
       console.log("loading model!");
       return new Promise((resolve) => {
         cocoSsd
-          .load({ base: "mobilenet_v2" })
+          .load({ base: "lite_mobilenet_v2" })
           .then((model) => {
             // this.model = model;
             resolve(model);
