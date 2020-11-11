@@ -33,16 +33,18 @@ export default {
       debugStatus: "",
       status: "",
       isModelReady: "",
+      reload: "",
     };
   },
   methods: {
     play() {
+      this.reload = true;
       this.main();
       this.show = false;
       this.debugStatus = "Playing";
     },
     pause() {
-      clearInterval(this.interval);
+      this.reload = false;
       this.debugStatus = "Stoping";
     },
     createImg() {
@@ -50,7 +52,7 @@ export default {
         axios
           .get(this.src, {
             responseType: "arraybuffer",
-            "Access-Control-Allow-Origin" : "*"
+            "Access-Control-Allow-Origin": "*",
           })
           .then((response) => {
             // console.log("response from axios");
@@ -80,7 +82,7 @@ export default {
       console.log("loading model!");
       return new Promise((resolve) => {
         cocoSsd
-          .load({ base: "lite_mobilenet_v2" })
+          .load({ base: "mobilenet_v1" })
           .then((model) => {
             // this.model = model;
             resolve(model);
@@ -99,10 +101,15 @@ export default {
         const predictions = await models.detect(img);
         const newimage = await this.createImg();
         this.canvas(img, predictions);
-        requestAnimationFrame(() => {
-          console.log("request animation frame");
-          this.detect(newimage, models);
-        });
+
+        if (this.reload) {
+          requestAnimationFrame(() => {
+            console.log("request animation frame");
+            this.detect(newimage, models);
+          });
+        }else{
+          this.status = "paused"
+        }
       } catch (e) {
         console.log(e);
       }
